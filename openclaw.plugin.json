@@ -1,0 +1,61 @@
+{
+  "$schema": "https://openclaw.ai/schemas/plugin.json",
+  "id": "oingai-wecom",
+  "name": "oingai-wecom",
+  "version": "0.0.1",
+  "description": "企业微信推送补丁（WeCom Push Patch），优先使用 Bot WS；失败时返回 Agent API fallback 指引。",
+  "author": "OingAI Team",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "tools": [
+    {
+      "name": "oingai_wecom_send",
+      "description": "发送企业微信消息。优先使用 Bot WS；失败时返回 Agent API fallback 指引。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "接收消息的用户ID（如 'jin', 'vivi'）"
+          },
+          "message": {
+            "type": "string",
+            "description": "要发送的消息内容（支持 Markdown）"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "可选的企业微信账号ID；未传时使用上下文账号或 default"
+          }
+        },
+        "required": ["userId", "message"]
+      }
+    },
+    {
+      "name": "oingai_wecom_session_resolve",
+      "description": "根据 userId 生成常用的 sessionKey 和 Agent API target 格式。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "用户ID（如 'jin', 'vivi'）"
+          },
+          "accountId": {
+            "type": "string",
+            "description": "可选的企业微信账号ID；未传时使用上下文账号或 default"
+          }
+        },
+        "required": ["userId"]
+      }
+    }
+  ],
+  "compatibility": {
+    "openclaw": ">=2026.3.22",
+    "node": ">=18.0.0"
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

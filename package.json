@@ -1,0 +1,57 @@
+{
+  "name": "oingai-wecom",
+  "version": "0.0.1",
+  "description": "WeCom Push Patch for OpenClaw. Prioritizes Bot WS delivery and provides an Agent API fallback path.",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "validate:metadata": "node scripts/validate-metadata.cjs",
+    "typecheck": "tsc --noEmit && npm run validate:metadata",
+    "test": "npm run typecheck && npm run build && node --test tests/**/*.test.cjs",
+    "prepack": "npm run clean && npm run typecheck && npm run build"
+  },
+  "keywords": [
+    "openclaw",
+    "wecom",
+    "wecom-push",
+    "wecom-push-patch",
+    "企业微信",
+    "plugin",
+    "typescript"
+  ],
+  "author": "OingAI Team",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "openclaw": ">=2026.3.22"
+  },
+  "dependencies": {
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "openclaw.plugin.json",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "openclaw": {
+    "extensions": ["./dist/index.js"]
+  }
+}
